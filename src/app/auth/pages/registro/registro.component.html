@@ -50,7 +50,7 @@
                     <span class="form-text text-danger"
                           *ngIf="campoValido('username')">
                         El username no puede ser fersa
-                      </span>
+                    </span>
                 </div>
             </div>
 
@@ -60,7 +60,13 @@
                 <div class="col-sm-9">
                     <input  type="password"
                             class="form-control"
-                            placeholder="Contraseña del Usuario">
+                            placeholder="Contraseña del Usuario"
+                            formControlName="password">
+
+                    <span class="form-text text-danger"
+                          *ngIf="campoValido('password')">
+                        La contraseña debe tener 8 caracteres.
+                    </span>
                 </div>
             </div>
 
@@ -70,7 +76,13 @@
                 <div class="col-sm-9">
                     <input  type="password"
                             class="form-control"
-                            placeholder="Confirmar contraseña">
+                            placeholder="Confirmar contraseña"
+                            formControlName="password2">
+
+                    <span class="form-text text-danger"
+                          *ngIf="campoValido('password2')">
+                        Las contraseñas deben ser iguales
+                    </span>
                 </div>
             </div>
 
@@ -88,15 +100,6 @@
 
 <div class="row">
     <div class="col">
-        <span>Form Valid</span>
-        <pre>{{ miFormulario.valid | json }}</pre>
-
-        <span>Form Touched</span>
-        <pre>{{ miFormulario.touched | json }}</pre>
-
-        <span>Form Value</span>
-        <pre>{{ miFormulario.value | json }}</pre>
-
         <span>Nombre</span>
         <pre>{{ miFormulario.controls.nombre.errors| json }}</pre>
 
@@ -105,5 +108,20 @@
 
         <span>Username</span>
         <pre>{{ miFormulario.controls.username.errors| json }}</pre>
+
+        <span>Password</span>
+        <pre>{{ miFormulario.controls.password.errors| json }}</pre>
+
+        <span>Confirmar</span>
+        <pre>{{ miFormulario.controls.password2.errors| json }}</pre>
+
+        <span>Form Errors</span>
+        <pre>{{ miFormulario.errors | json }}</pre>
+
+        <span>Form Touched</span>
+        <pre>{{ miFormulario.touched | json }}</pre>
+
+        <span>Form Value</span>
+        <pre>{{ miFormulario.value | json }}</pre>
     </div>
 </div>

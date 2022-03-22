@@ -89,7 +89,8 @@
             <div class="row">
                 <div class="col">
                     <button class="btn btn-outline-success float-end"
-                            type="submit">
+                            type="submit"
+                            [disabled]="miFormulario.pending">
                         Crear Usuario
                     </button>
                 </div>
@@ -114,6 +115,9 @@
 
         <span>Confirmar</span>
         <pre>{{ miFormulario.controls.password2.errors| json }}</pre>
+
+        <span>Form Status</span>
+        <pre>{{ miFormulario.status | json }}</pre>
 
         <span>Form Errors</span>
         <pre>{{ miFormulario.errors | json }}</pre>

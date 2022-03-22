@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registro',
@@ -10,19 +10,27 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class RegistroComponent implements OnInit {
   /* Temporalmente */
   regexFullName: string = '([a-zA-Z]+) ([a-zA-Z]+)';
-  emailPattern: string = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
+  emailPattern : string = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
+
+  noPuedeSerFersa(control: FormControl) {
+    const valor: string = control.value?.trim().toLowerCase();
+  
+    return (valor === 'fersa') ? { fersa: true } : null 
+  }
 
   miFormulario: FormGroup = this.fb.group({
-    nombre: [ '', [ Validators.required, Validators.pattern(this.regexFullName) ]],
-    email: [ '', [ Validators.required, Validators.pattern(this.emailPattern) ]]
+    nombre  : [ '', [ Validators.required, Validators.pattern(this.regexFullName) ]],
+    email   : [ '', [ Validators.required, Validators.pattern(this.emailPattern) ]],
+    username: [ '', [ Validators.required, this.noPuedeSerFersa ] ]
   });
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.miFormulario.reset({
-      nombre: 'Fernando Nicolas',
-      email : 'fersanti2896@gmail.com'
+      nombre  : 'Fernando Nicolas',
+      email   : 'fersanti2896@gmail.com',
+      username: 'fersanti2896'
     })
   }
 

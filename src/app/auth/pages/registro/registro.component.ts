@@ -23,6 +23,16 @@ export class RegistroComponent implements OnInit {
      ]
   });
 
+  /* Angular lo ejecuta cuando detecta un cambio en el ciclo de cambios */
+  get emailErrorMsg(): string {
+    const errors = this.miFormulario.get('email')?.errors;
+
+    return ( errors?.required ) 
+            ? 'Email es obligatorio!' : ( errors?.pattern ) 
+            ? 'El valor ingresado no tiene formato de correo!' : ( errors?.emailTomado )
+            ? 'El correo electrónico ya existe!' : '';
+  };
+
   constructor(private fb: FormBuilder, 
               private vs: ValidatorService, 
               private emailValidator: EmailValidatorService) { }
@@ -42,7 +52,12 @@ export class RegistroComponent implements OnInit {
            && this.miFormulario.get(campo)?.touched;
   }
 
-  emailRequired() {
+  submitFormulario() {
+    console.log(this.miFormulario.value)
+    this.miFormulario.markAllAsTouched();
+  }
+
+  /* emailRequired() {
     return this.miFormulario.get('email')?.errors?.required
            && this.miFormulario.get('email')?.touched;
   }
@@ -55,10 +70,5 @@ export class RegistroComponent implements OnInit {
   emailTomado() {
     return this.miFormulario.get('email')?.errors?.emailTomado
            && this.miFormulario.get('email')?.touched;
-  }
-
-  submitFormulario() {
-    console.log(this.miFormulario.value)
-    this.miFormulario.markAllAsTouched();
-  }
+  } */
 }
